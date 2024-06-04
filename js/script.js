@@ -1,6 +1,5 @@
 let humanScore = 0;
 let computerScore = 0;
-let draw = false;
 
 function getRandomNumber(){
     let randomNumber =Math.floor(Math.random()*3)+1;
@@ -39,43 +38,46 @@ function playRound(humanChoice, computerChoice){
     computerChoice= getComputerChoice();
     // Player plays Rock
     if(humanChoice =="ROCK"){
-        if(computerChoice == "SCISSOR"){
+        if(computerChoice === "SCISSOR"){
             console.log("You won! Rock beats Scissor");
             humanScore += 1;
         }
-        if(computerChoice == "PAPER"){
+        if(computerChoice === "PAPER"){
             console.log("You Lose! Paper beats Rock");
             computerScore += 1;
         }
-        else
+        if(computerChoice === "ROCK"){
             console.log("Draw! Both played Rock");
+        }
     }
 
     // Player plays Paper
     if(humanChoice =="PAPER"){
-        if(computerChoice == "ROCK"){
-            console.log("You won! Paper beats Rock");
-            humanScore += 1;
-        }
-        if(computerChoice == "SCISSOR"){
+        if(computerChoice === "SCISSOR"){
             console.log("You Lose! Scissor beats Paper");
             computerScore += 1;
         }
-        else
+        if(computerChoice === "ROCK"){
+            console.log("You Win! Paper beats Rock");
+            humanScore += 1;
+        }
+        if(computerChoice === "PAPER"){
             console.log("Draw! Both played Paper");
+        }
     }
     // Player plays Scissor
-    if(humanChoice =="SCISSORS"){
-        if(computerChoice == "PAPER"){
+    if(humanChoice =="SCISSOR"){
+        if(computerChoice === "PAPER"){
             console.log("You won! Scissor beats Paper");
             humanScore += 1;
         }
-        if(computerChoice == "ROCK"){
+        if(computerChoice === "ROCK"){
             console.log("You Lose! Rock beats Scissor");
             computerScore += 1;
         }
-        else
-            console.log("Draw! Both played Scissor");
+        if(computerChoice === "SCISSOR"){
+            console.log("Draw! Both played scissor");
+        }
     }
 }
 
@@ -83,6 +85,9 @@ function playGame(){
     let i;
     for(i=0; i<5; i++){
         playRound();
+        if(humanScore ===3 || computerScore ===3){
+            break;
+        };
     }
     if(humanScore>computerScore){
         console.log("Yay! You Won!");
@@ -93,7 +98,10 @@ function playGame(){
         console.log("Too Bad! You Lost!");
         console.log("Your Score: "+ humanScore + " Computer Score: "+ computerScore);
     }
-    else
+    if(computerScore===humanScore){
         console.log("You Drawed");
         console.log("Your Score: "+ humanScore + " Computer Score: "+ computerScore);
+    }
 }
+
+playGame();
